@@ -1,86 +1,63 @@
 package tests;
 
 import base.BaseTest;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.LoginPage;
+import pages.SignupPage;
 
 public class AuthenticationTests extends BaseTest {
 
     @Test
     public void loginWithValidCredentials() {
 
-        driver.findElement(By.linkText("Signup / Login")).click();
+        LoginPage loginPage = new LoginPage(driver);
 
-        driver.findElement(By.xpath("//input[@data-qa='login-email']"))
-                .sendKeys("solefi8727@okcpress.com");
+        loginPage.openLoginPage();
+        loginPage.login("solefi8727@okcpress.com", "QualityAssurance");
 
-        driver.findElement(By.xpath("//input[@data-qa='login-password']"))
-                .sendKeys("QualityAssurance");
-
-        driver.findElement(By.xpath("//button[@data-qa='login-button']")).click();
-
-        String loggedInText = driver.findElement(By.xpath("//a[contains(text(),'Logged in as')]"))
-                .getText();
-
-        Assert.assertTrue(loggedInText.contains("QA"));
+        Assert.assertTrue(loginPage.getLoggedInText().contains("QA"));
     }
 
     @Test
     public void logoutUser() {
 
-        driver.findElement(By.linkText("Signup / Login")).click();
+        LoginPage loginPage = new LoginPage(driver);
 
-        driver.findElement(By.xpath("//input[@data-qa='login-email']"))
-                .sendKeys("solefi8727@okcpress.com");
+        loginPage.openLoginPage();
+        loginPage.login("solefi8727@okcpress.com", "QualityAssurance");
+        loginPage.logout();
 
-        driver.findElement(By.xpath("//input[@data-qa='login-password']"))
-                .sendKeys("QualityAssurance");
-
-        driver.findElement(By.xpath("//button[@data-qa='login-button']")).click();
-
-        driver.findElement(By.linkText("Logout")).click();
-
-        String currentUrl = driver.getCurrentUrl();
-
-        Assert.assertTrue(currentUrl.contains("login"));
+        Assert.assertTrue(driver.getCurrentUrl().contains("login"));
     }
-    
+
     @Test
     public void loginWithInvalidCredentials() {
 
-        driver.findElement(By.linkText("Signup / Login")).click();
+        LoginPage loginPage = new LoginPage(driver);
 
-        driver.findElement(By.xpath("//input[@data-qa='login-email']"))
-                .sendKeys("wrong@test.com");
+        loginPage.openLoginPage();
+        loginPage.login("wrong@test.com", "wrongpassword");
 
-        driver.findElement(By.xpath("//input[@data-qa='login-password']"))
-                .sendKeys("wrongpassword");
-
-        driver.findElement(By.xpath("//button[@data-qa='login-button']")).click();
-
-        String errorMessage = driver.findElement(By.xpath("//p[text()='Your email or password is incorrect!']"))
-                .getText();
-
-        Assert.assertEquals(errorMessage, "Your email or password is incorrect!");
+        Assert.assertEquals(
+                loginPage.getLoginErrorMessage(),
+                "Your email or password is incorrect!"
+        );
     }
     
     @Test
     public void registerWithExistingEmail() {
 
-        driver.findElement(By.linkText("Signup / Login")).click();
+        LoginPage loginPage = new LoginPage(driver);
+        SignupPage signupPage = new SignupPage(driver);
 
-        driver.findElement(By.xpath("//input[@data-qa='signup-name']"))
-                .sendKeys("QA");
+        loginPage.openLoginPage();
 
-        driver.findElement(By.xpath("//input[@data-qa='signup-email']"))
-                .sendKeys("solefi8727@okcpress.com");
+        signupPage.signupWithExistingEmail("QA", "solefi8727@okcpress.com");
 
-        driver.findElement(By.xpath("//button[@data-qa='signup-button']")).click();
-
-        String errorMessage = driver.findElement(By.xpath("//p[text()='Email Address already exist!']"))
-                .getText();
-
-        Assert.assertEquals(errorMessage, "Email Address already exist!");
+        Assert.assertEquals(
+                signupPage.getExistingEmailError(),
+                "Email Address already exist!"
+        );
     }
-}
+}	

@@ -8,6 +8,7 @@
           <include name="setup"/>
           <include name="tearDown"/>
           <include name="loginWithInvalidCredentials"/>
+          <include name="logoutUser"/>
         </methods>
       </class> <!-- tests.AuthenticationTests -->
     </classes>
