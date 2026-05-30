@@ -4,7 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.JavascriptExecutor;
 import java.time.Duration;
 
 public class CheckoutPage {
@@ -150,7 +151,16 @@ public class CheckoutPage {
     // Payment
 
     public void clickPlaceOrder() {
-        driver.findElement(placeOrderBtn).click();
+
+        WebElement placeOrder =
+                driver.findElement(placeOrderBtn);
+
+        JavascriptExecutor js =
+                (JavascriptExecutor) driver;
+
+        js.executeScript("arguments[0].scrollIntoView(true);", placeOrder);
+
+        js.executeScript("arguments[0].click();", placeOrder);
     }
 
     public void enterPaymentDetails() {
@@ -173,4 +183,9 @@ public class CheckoutPage {
     public boolean isOrderPlacedVisible() {
         return driver.findElement(orderPlacedMessage).isDisplayed();
     }
+   
+    
+    //////TC23 — Verify Address Details in Checkout Page 
+    /// 
+    
 }

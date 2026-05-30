@@ -44,6 +44,10 @@ public class CheckoutTests extends BaseTest {
 
         Assert.assertTrue(checkoutPage.isBillingAddressVisible());
 
+        System.out.println("Delivery Address is displayed");
+
+        System.out.println("Billing Address is displayed");
+        
         checkoutPage.clickPlaceOrder();
 
         checkoutPage.enterPaymentDetails();
@@ -51,5 +55,26 @@ public class CheckoutTests extends BaseTest {
         checkoutPage.clickPayAndConfirm();
 
         Assert.assertTrue(checkoutPage.isOrderPlacedVisible());
+    }
+    
+    //////TC23 — Verify Address Details in Checkout Page 
+    @Test
+    public void verifyAddressDetailsInCheckoutPage() {
+
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+
+        checkoutPage.clickSignupLogin();
+
+        checkoutPage.login("solefi8727@okcpress.com", "QualityAssurance");
+
+        checkoutPage.addFirstProductToCart();
+
+        checkoutPage.clickViewCart();
+
+        checkoutPage.clickProceedToCheckout();
+
+        Assert.assertTrue(checkoutPage.isDeliveryAddressVisible());
+
+        Assert.assertTrue(checkoutPage.isBillingAddressVisible());
     }
 }
