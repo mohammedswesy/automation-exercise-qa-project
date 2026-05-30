@@ -106,6 +106,18 @@ public class CheckoutPage {
     By orderPlacedMessage =
             By.xpath("//b[contains(text(),'Order Placed!')]");
     
+    By downloadInvoiceBtn =
+            By.xpath("//a[contains(text(),'Download Invoice')]");
+    
+    By subscriptionText =
+            By.xpath("//h2[contains(text(),'Subscription')]");
+
+    By scrollUpArrow =
+            By.id("scrollUp");
+
+    By fullFledgedText =
+            By.xpath("//h2[contains(text(),'Full-Fledged practice website for Automation Engineers')]");
+    
     
  // Login Actions
 
@@ -187,5 +199,39 @@ public class CheckoutPage {
     
     //////TC23 — Verify Address Details in Checkout Page 
     /// 
+    /// 
+    /// 
     
+    /// TC24 — Download Invoice after purchase order
+    public void clickDownloadInvoice() {
+
+        WebElement downloadBtn =
+                driver.findElement(downloadInvoiceBtn);
+
+        JavascriptExecutor js =
+                (JavascriptExecutor) driver;
+
+        js.executeScript("arguments[0].scrollIntoView(true);", downloadBtn);
+
+        js.executeScript("arguments[0].click();", downloadBtn);
+    }
+    
+    public boolean isSubscriptionVisible() {
+
+        return driver.findElement(subscriptionText).isDisplayed();
+    }
+
+    
+  ///  TC25 — Scroll Up using Arrow button
+    public void clickScrollUpArrow() {
+
+        driver.findElement(scrollUpArrow).click();
+    }
+
+    public boolean isHomePageTextVisible() {
+
+        return driver.findElement(fullFledgedText).isDisplayed();
+    }
+    
+   /// TC26 — Scroll Up without Arrow button
 }
