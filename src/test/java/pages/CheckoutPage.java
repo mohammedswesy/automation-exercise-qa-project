@@ -9,6 +9,8 @@ import java.time.Duration;
 
 public class CheckoutPage {
 
+				////////TC 22 — Add to cart from Recommended items
+	
     WebDriver driver;
 
     public CheckoutPage(WebDriver driver) {
@@ -45,5 +47,130 @@ public class CheckoutPage {
 
     public boolean isProductDisplayedInCart() {
         return driver.findElement(cartProduct).isDisplayed();
+    }
+    
+    
+	////////TC 16 — Place Order: Login before Checkout
+	/// 
+ // Login
+    By signupLoginBtn =
+            By.linkText("Signup / Login");
+
+    By loginEmail =
+            By.xpath("//input[@data-qa='login-email']");
+
+    By loginPassword =
+            By.xpath("//input[@data-qa='login-password']");
+
+    By loginButton =
+            By.xpath("//button[@data-qa='login-button']");
+
+    // Product
+    By firstProductAddToCart =
+            By.xpath("(//a[contains(text(),'Add to cart')])[1]");
+
+    // Cart
+    By proceedToCheckoutBtn =
+            By.xpath("//a[contains(text(),'Proceed To Checkout')]");
+
+    // Checkout
+    By deliveryAddress =
+            By.id("address_delivery");
+
+    By billingAddress =
+            By.id("address_invoice");
+
+    // Payment
+    By placeOrderBtn =
+            By.xpath("//a[contains(text(),'Place Order')]");
+
+    By nameOnCard =
+            By.name("name_on_card");
+
+    By cardNumber =
+            By.name("card_number");
+
+    By cvc =
+            By.name("cvc");
+
+    By expiryMonth =
+            By.name("expiry_month");
+
+    By expiryYear =
+            By.name("expiry_year");
+
+    By payAndConfirmBtn =
+            By.id("submit");
+
+    By orderPlacedMessage =
+            By.xpath("//b[contains(text(),'Order Placed!')]");
+    
+    
+ // Login Actions
+
+    public void clickSignupLogin() {
+        driver.findElement(signupLoginBtn).click();
+    }
+
+    public void login(String email, String password) {
+
+        driver.findElement(loginEmail).sendKeys(email);
+
+        driver.findElement(loginPassword).sendKeys(password);
+
+        driver.findElement(loginButton).click();
+    }
+
+    // Cart Actions
+
+    public void addFirstProductToCart() {
+
+        driver.findElement(firstProductAddToCart).click();
+
+        WebDriverWait wait =
+                new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(viewCartBtn));
+    }
+
+    public void clickProceedToCheckout() {
+        driver.findElement(proceedToCheckoutBtn).click();
+    }
+
+    // Validation
+
+    public boolean isDeliveryAddressVisible() {
+        return driver.findElement(deliveryAddress).isDisplayed();
+    }
+
+    public boolean isBillingAddressVisible() {
+        return driver.findElement(billingAddress).isDisplayed();
+    }
+
+    // Payment
+
+    public void clickPlaceOrder() {
+        driver.findElement(placeOrderBtn).click();
+    }
+
+    public void enterPaymentDetails() {
+
+        driver.findElement(nameOnCard).sendKeys("QA Tester");
+
+        driver.findElement(cardNumber).sendKeys("1234123412341234");
+
+        driver.findElement(cvc).sendKeys("123");
+
+        driver.findElement(expiryMonth).sendKeys("12");
+
+        driver.findElement(expiryYear).sendKeys("2030");
+    }
+
+    public void clickPayAndConfirm() {
+        driver.findElement(payAndConfirmBtn).click();
+    }
+
+    public boolean isOrderPlacedVisible() {
+        return driver.findElement(orderPlacedMessage).isDisplayed();
     }
 }
