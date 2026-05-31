@@ -6,7 +6,7 @@
       <class name="tests.ProductsTests">
         <methods>
           <include name="setup"/>
-          <include name="addReviewOnProduct"/>
+          <include name="testCasePage"/>
         </methods>
       </class> <!-- tests.ProductsTests -->
     </classes>

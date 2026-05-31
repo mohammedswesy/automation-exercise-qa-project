@@ -9,7 +9,7 @@ import pages.ProductsPage;
 public class ProductsTests extends BaseTest {
 	
 											//TC007 Verify Test Cases Page
-	@Test
+	@Test 
 	public void testCasePage() throws InterruptedException {
 		ProductsPage productsPage = new ProductsPage(driver);
 		
@@ -18,7 +18,7 @@ public class ProductsTests extends BaseTest {
 		Thread.sleep(200);
 		
 		//click on test case button
-		productsPage.verifyTestCases();
+		productsPage.clickTestCase();
 		Thread.sleep(1000); // wait for safe side
 		
 		//see if the test case page is displayed or not
@@ -168,8 +168,6 @@ public class ProductsTests extends BaseTest {
 		
 		//verify that success message is visible
 		Assert.assertEquals(productsPage.successMessage(), true, "  message review not send . ");
-		
-		
 		
 	}
 	

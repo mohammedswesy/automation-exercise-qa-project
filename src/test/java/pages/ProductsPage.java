@@ -159,7 +159,6 @@ public class ProductsPage {
 	public boolean verifyHomePageExist() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
-		js.executeScript("window.scrollBy(0, 300);");
 		hPageExist = driver.findElement(homePage).isDisplayed();
     	return hPageExist;
     	
@@ -168,9 +167,10 @@ public class ProductsPage {
 	// click test cases button and prevent ad pop up
 	public void clickTestCase() {
 		 WebElement testCaseSection = driver.findElement(testCase);
-		 JavascriptExecutor js = (JavascriptExecutor) driver;
 		 testCaseSection.click();
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
 		 js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+		 js.executeScript("window.scrollTo(0, 0);");
 		 testCaseSection.click();
 		 
 	}
