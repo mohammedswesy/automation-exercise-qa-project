@@ -53,7 +53,7 @@ public class ProductsPage {
     By productBrand = By.xpath("//b[text()='Brand:']");
     
     //variables
-    boolean allProductsVis, fProductDetailsOpen, name, category, price, availability, condition, brand;
+    boolean allProductsVis, fProductDetailsOpen, name, categoryFProduct, price, availability, condition, brand;
 	int productsListEmp;
     
     /////////////////////////////////////////////////////////////////////////
@@ -72,7 +72,35 @@ public class ProductsPage {
     
     //variables
     boolean searchedProHeadVis, allSearchedProVis;
-    //List<WebElement> productsRelated;
+ //////////////////////////////////////////////////////////////////////////
+  												//locators for TC018
+    
+    //locator for Catagory header if visible
+    By catagoryHeadVis = By.xpath("//h2[normalize-space()='Category']");
+    
+    //locator for women catagory to click
+    By womenCatagory = By.xpath("//a[normalize-space()='Women']");
+    
+    //locator for Dress subcatagory of women catagory to click
+    By subCatagoryWomen = By.xpath("//div[@id='Women']//a[contains(text(),'Dress')]");
+    
+    //locator to verify category page is displayed with correct heading "Women - Dress"
+    By catagoryHeaderWomenDisplayed = By.xpath("//h2[normalize-space()='Women - Dress Products']");
+    
+    //locator for men catagory to click
+    By menCatagory = By.xpath("//a[normalize-space()='Men']");
+
+    //locator for tshirts subcatagory of men catagory to click
+    By subCatagoryMen = By.xpath("//a[normalize-space()='Tshirts']");
+    
+    //locator to verify category page is displayed with correct heading "Men - Tshirts "
+    By catagoryHeaderMenDisplayed = By.xpath("//h2[normalize-space()='Men - Tshirts Products']");
+    
+    //Variabels
+    boolean categoryHeaderVis, catagoryWomenDisplayed, catagoryMenDisplayed;
+    
+    
+    
     
     //*********************************************************************************************************************\\
     
@@ -168,8 +196,8 @@ public class ProductsPage {
 		}
 		
 		public boolean fProductCata() {
-			category= driver.findElement(productCategory).isDisplayed();
-			return category;
+			categoryFProduct= driver.findElement(productCategory).isDisplayed();
+			return categoryFProduct;
 					
 		}
 		
@@ -235,7 +263,85 @@ public class ProductsPage {
 					
 		}
 		
-	
+		
+		
+		
+		
+		
+		///////////////////////////////////////////////////////TC18: View Catagory
+		
+		//verify that catagory header is visable 
+		public boolean catagoryVisible() {
+			categoryHeaderVis= driver.findElement(catagoryHeadVis).isDisplayed();
+			return categoryHeaderVis;
+			
+		}
+		
+		//click on women catagory
+		public void clcickOnWomenCata() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollBy(0, 150);");
+			driver.findElement(womenCatagory).click();
+			
+		}
+		
+		//click on women catagory sub-catagory "Dress"
+		public void clcickOnWomSubCata() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollBy(0, 150);");
+			driver.findElement(subCatagoryWomen).click();
+			
+		}
+		
+		//verify that catagory Dress header is visable 
+		public boolean catagoryHearderDress() {
+			catagoryWomenDisplayed= driver.findElement(catagoryHeaderWomenDisplayed).isDisplayed();
+			return catagoryWomenDisplayed;
+			
+		}
+		
+		//click on men catagory
+		public void clcickOnMenCata() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollBy(0, 150);");
+			driver.findElement(menCatagory).click();
+			
+		}
+		
+		//click on men catagory sub-catagory "Tshirt"
+		public void clcickOnMenSubCata() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollBy(0, 150);");
+			driver.findElement(subCatagoryMen).click();
+			
+		}
+		
+		//verify that catagory Tshirt header is visable 
+		public boolean catagoryHearderTshirts() {
+			catagoryMenDisplayed= driver.findElement(catagoryHeaderMenDisplayed).isDisplayed();
+			return catagoryMenDisplayed;
+			
+		}
+		
+		//to call women method
+		public void womenCatagory() {
+			clcickOnWomenCata();
+			clcickOnWomSubCata();
+			
+		}
+		
+		//to call men method
+		public void menCatagory() {
+			clcickOnMenCata();
+			clcickOnMenSubCata();
+			
+		}
+		
+		
 	
 }
 	

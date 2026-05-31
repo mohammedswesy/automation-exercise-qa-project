@@ -89,8 +89,28 @@ public class ProductsTests extends BaseTest {
 		
 	}
 	
-	
-	
+												//TC18: View Catagory
+	@Test
+	public void viewCatagory()  {
+		
+		ProductsPage productsPage = new ProductsPage(driver);
+		
+		//see if the Catagory sidebar displayed
+		Assert.assertEquals(productsPage.catagoryVisible(), true, " Catagory sidebar not displayed. ");
+		
+		//click on women catagory with subgcatogry Dress
+		productsPage.womenCatagory();
+		
+		//see if the women Catagory header displayed
+		Assert.assertEquals(productsPage.catagoryHearderDress(), true, " Catagory women header not displayed. ");
+		
+		//click on men catagory with subgcatogry Tshirt
+				productsPage.menCatagory();
+		
+		//see if the women Catagory header displayed
+		Assert.assertEquals(productsPage.catagoryHearderTshirts(), true, " Catagory men header not displayed. ");
+		
+	}
 	
 	
 	

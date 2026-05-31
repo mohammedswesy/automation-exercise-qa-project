@@ -2,19 +2,19 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-05-31T00:48:15 EEST" name="Default suite" finished-at="2026-05-31T00:48:29 EEST" duration-ms="13737">
+  <suite started-at="2026-05-31T10:13:35 EEST" name="Default suite" finished-at="2026-05-31T10:13:43 EEST" duration-ms="8391">
     <groups>
     </groups>
-    <test started-at="2026-05-31T00:48:15 EEST" name="Default test" finished-at="2026-05-31T00:48:29 EEST" duration-ms="13737">
+    <test started-at="2026-05-31T10:13:35 EEST" name="Default test" finished-at="2026-05-31T10:13:43 EEST" duration-ms="8391">
       <class name="tests.ProductsTests">
-        <test-method is-config="true" signature="setup()[pri:0, instance:tests.ProductsTests@79079097]" started-at="2026-05-31T00:48:16 EEST" name="setup" finished-at="2026-05-31T00:48:25 EEST" duration-ms="9183" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.ProductsTests@4d1c00d0]" started-at="2026-05-31T10:13:35 EEST" name="setup" finished-at="2026-05-31T10:13:40 EEST" duration-ms="5040" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="verifyAllProductsAndProductDetail()[pri:0, instance:tests.ProductsTests@79079097]" started-at="2026-05-31T00:48:25 EEST" name="verifyAllProductsAndProductDetail" finished-at="2026-05-31T00:48:29 EEST" duration-ms="4517" status="PASS">
+        <test-method signature="viewCatagory()[pri:0, instance:tests.ProductsTests@4d1c00d0]" started-at="2026-05-31T10:13:40 EEST" name="viewCatagory" finished-at="2026-05-31T10:13:43 EEST" duration-ms="3305" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyAllProductsAndProductDetail -->
+        </test-method> <!-- viewCatagory -->
       </class> <!-- tests.ProductsTests -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
