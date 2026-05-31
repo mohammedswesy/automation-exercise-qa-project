@@ -182,11 +182,6 @@ public class ProductsPage {
 		
 	}
 	
-//	public void verifyTestCasesPage() {
-//		clickTestCase();
-//		
-//	}
-	
 	///////////////////////////////////////////////TC008 Verify All Products Page and product details	
 	
 	// click on product page
@@ -267,21 +262,6 @@ public class ProductsPage {
 			return brand;
 					
 		}
-		
-//		public void verifyAllProductsPageAndProductDetails() throws InterruptedException {
-//			Thread.sleep(500);
-////			verifyHomePageExist();
-//			Thread.sleep(500);
-//			clickProductButton();
-//			Thread.sleep(100); // wait for safe side
-////			verifyAllProducts();
-//			verifyProductsList();
-//			Thread.sleep(100); // wait for safe side
-//			viewFirstProduct();
-////			fProductDetailsPage();
-////			fProductDetailsVis();
-//			
-//		}
 	
 	///////////////////////////////////////////////////////TC9: Search Product
 	
@@ -305,11 +285,7 @@ public class ProductsPage {
 			return allSearchedProVis;
 					
 		}
-		
-		
-		
-		
-		
+
 		
 		///////////////////////////////////////////////////////TC18: View Catagory
 		
