@@ -1,21 +1,23 @@
 package tests;
 
 import base.BaseTest;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CheckoutPage;
+import pages.HomePage;
+import pages.LoginPage;
+import utils.TestData;
 
 public class CheckoutTests extends BaseTest {
 
+    // TC 22 — Add to cart from Recommended items
     @Test
     public void addToCartFromRecommendedItems() {
 
         CheckoutPage checkoutPage = new CheckoutPage(driver);
+        HomePage homePage = new HomePage(driver);
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        homePage.scrollToBottom();
 
         checkoutPage.addRecommendedProductToCart();
 
@@ -23,129 +25,110 @@ public class CheckoutTests extends BaseTest {
 
         Assert.assertTrue(checkoutPage.isProductDisplayedInCart());
     }
-    
-////////TC 16 — Place Order: Login before Checkout
+
+    // TC 16 — Place Order: Login before Checkout
     @Test
+  
     public void placeOrderLoginBeforeCheckout() {
 
+        LoginPage loginPage       = new LoginPage(driver);
         CheckoutPage checkoutPage = new CheckoutPage(driver);
 
-        checkoutPage.clickSignupLogin();
+        loginPage.login(TestData.LOGIN_EMAIL, TestData.LOGIN_PASSWORD);
 
-        checkoutPage.login("solefi8727@okcpress.com", "QualityAssurance");
-
-        checkoutPage.addFirstProductToCart();
-
-        checkoutPage.clickViewCart();
-
+        checkoutPage.addRecommendedProductToCart();
+        checkoutPage.clickViewCart();        
         checkoutPage.clickProceedToCheckout();
 
         Assert.assertTrue(checkoutPage.isDeliveryAddressVisible());
-
         Assert.assertTrue(checkoutPage.isBillingAddressVisible());
 
-        System.out.println("Delivery Address is displayed");
-
-        System.out.println("Billing Address is displayed");
-        
         checkoutPage.clickPlaceOrder();
-
-        checkoutPage.enterPaymentDetails();
-
+        checkoutPage.enterPaymentDetails(
+                TestData.CARD_NAME,
+                TestData.CARD_NUMBER,
+                TestData.CARD_CVC,
+                TestData.CARD_EXPIRY_MONTH,
+                TestData.CARD_EXPIRY_YEAR
+        );
         checkoutPage.clickPayAndConfirm();
 
         Assert.assertTrue(checkoutPage.isOrderPlacedVisible());
     }
-    
-    //////TC23 — Verify Address Details in Checkout Page 
+
+    // TC 23 — Verify Address Details in Checkout Page
     @Test
     public void verifyAddressDetailsInCheckoutPage() {
 
+        LoginPage loginPage       = new LoginPage(driver);
         CheckoutPage checkoutPage = new CheckoutPage(driver);
 
-        checkoutPage.clickSignupLogin();
 
-        checkoutPage.login("solefi8727@okcpress.com", "QualityAssurance");
+        loginPage.login(TestData.LOGIN_EMAIL, TestData.LOGIN_PASSWORD);
 
-        checkoutPage.addFirstProductToCart();
-
+        checkoutPage.addRecommendedProductToCart();
         checkoutPage.clickViewCart();
-
         checkoutPage.clickProceedToCheckout();
 
         Assert.assertTrue(checkoutPage.isDeliveryAddressVisible());
-
         Assert.assertTrue(checkoutPage.isBillingAddressVisible());
     }
-    
-    //////TC24 — Download Invoice after purchase order
-    /// 
+
+    // TC 24 — Download Invoice after purchase order
     @Test
     public void downloadInvoiceAfterPurchaseOrder() {
 
+        LoginPage loginPage       = new LoginPage(driver);
         CheckoutPage checkoutPage = new CheckoutPage(driver);
 
-        checkoutPage.clickSignupLogin();
 
-        checkoutPage.login("solefi8727@okcpress.com", "QualityAssurance");
+        loginPage.login(TestData.LOGIN_EMAIL, TestData.LOGIN_PASSWORD);
 
-        checkoutPage.addFirstProductToCart();
-
+        checkoutPage.addRecommendedProductToCart();
         checkoutPage.clickViewCart();
-
         checkoutPage.clickProceedToCheckout();
-
         checkoutPage.clickPlaceOrder();
-
-        checkoutPage.enterPaymentDetails();
-
+        checkoutPage.enterPaymentDetails(
+                TestData.CARD_NAME,
+                TestData.CARD_NUMBER,
+                TestData.CARD_CVC,
+                TestData.CARD_EXPIRY_MONTH,
+                TestData.CARD_EXPIRY_YEAR
+        );
         checkoutPage.clickPayAndConfirm();
 
         Assert.assertTrue(checkoutPage.isOrderPlacedVisible());
 
         checkoutPage.clickDownloadInvoice();
     }
-    
-    
-    
-  ///  TC25 — Scroll Up using Arrow button
-  /// 
+
+    // TC 25 — Scroll Up using Arrow button
     @Test
-    public void verifyScrollUpUsingArrowButton()throws InterruptedException {
+    public void verifyScrollUpUsingArrowButton() {
 
-        CheckoutPage checkoutPage = new CheckoutPage(driver);
-        Thread.sleep(2000);
+        HomePage homePage = new HomePage(driver);
 
-        JavascriptExecutor js =
-                (JavascriptExecutor) driver;
+        homePage.scrollToBottom();
 
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        Assert.assertTrue(homePage.isSubscriptionVisible());
 
-        Assert.assertTrue(checkoutPage.isSubscriptionVisible());
+        homePage.clickScrollUpArrow();
 
-        checkoutPage.clickScrollUpArrow();
-
-        Assert.assertTrue(checkoutPage.isHomePageTextVisible());
+        Assert.assertTrue(homePage.isHomePageTextVisible());
     }
-    
-   
-    /// TC26 — Scroll Up without Arrow button
-    /// 
+
+    // TC 26 — Scroll Up without Arrow button
     @Test
-    public void verifyScrollUpWithoutArrowButton() throws InterruptedException {
+    public void verifyScrollUpWithoutArrowButton() {
 
-        CheckoutPage checkoutPage = new CheckoutPage(driver);
-        Thread.sleep(2000);
+        HomePage homePage = new HomePage(driver);
 
-        JavascriptExecutor js =
-                (JavascriptExecutor) driver;
+        homePage.scrollToBottom();
 
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        Assert.assertTrue(homePage.isSubscriptionVisible());
 
-        Assert.assertTrue(checkoutPage.isSubscriptionVisible());
+        homePage.scrollToTop();
 
-        js.executeScript("window.scrollTo(0, 0)");
-
-        Assert.assertTrue(checkoutPage.isHomePageTextVisible());
+        Assert.assertTrue(homePage.isHomePageTextVisible());
     }
 }
