@@ -121,12 +121,29 @@ public class ProductsPage {
     boolean bSideBar, bPoloPageVis, bHMPageVis;
     
     
+    //////////////////////////////////////////////////////////////////////////
+												//locators for TC021
+  
+    //locator for verify reviwe section is visible
+    By reviweSectionVis  = By.xpath("//a[normalize-space()='Write Your Review']");
     
+    //locator for reviwer name 
+    By reviwerName  = By.xpath("//input[@id='name']");
     
+    //locator for email
+    By reviwerEmail = By.xpath("//input[@id='email']");
     
+    //locator for reviewer message 
+    By reviweMessage = By.xpath("//textarea[@id='review']");
     
+    //locator for submit button
+    By submitBtn = By.xpath("//button[@id='button-review']");
     
+  //locator for verify success message sent 
+    By successMessage = By.xpath("//span[normalize-space()='Thank you for your review.']");
     
+    //variables
+    boolean reviewSectionVis, successMessageVis;
     
     //*********************************************************************************************************************\\
     
@@ -407,6 +424,68 @@ public class ProductsPage {
 			return bHMPageVis;
 			
 		}	
+		
+		///////////////////////////////////////////////////////TC19: View & Cart Brand Products
+		
+		public boolean reviewSectionVis() {
+			reviewSectionVis= driver.findElement(reviweSectionVis).isDisplayed();
+			return reviewSectionVis;
+			
+		}	
+		
+		
+		public void enterName(String name) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+			driver.findElement(reviwerName).sendKeys(name);
+			
+		}
+		
+		
+		public void enterEmail(String email) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+			driver.findElement(reviwerEmail).sendKeys(email);
+			
+		}
+		
+		
+		public void enterReviewMess(String reviwerMessage) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+			driver.findElement(reviweMessage).sendKeys(reviwerMessage);
+			
+		}
+		
+		
+		public void clickSubmit() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+			driver.findElement(submitBtn).click();
+			
+		}
+		
+		
+		public void enterReviewOnProduct (String name, String email,String reviwerMessage ) {
+			enterName(name);
+			enterEmail(email);
+			enterReviewMess(reviwerMessage);
+			clickSubmit();
+			
+		}
+		
+		
+		public boolean successMessage () {
+			successMessageVis= driver.findElement(successMessage).isDisplayed();
+			return successMessageVis;
+			
+		}	
+		
+		
 		
 		
 		

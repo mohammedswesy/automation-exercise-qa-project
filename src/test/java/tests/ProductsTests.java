@@ -143,7 +143,35 @@ public class ProductsTests extends BaseTest {
 	}
 	
 	
-	
+											//TC21: Add review on product
+	@Test
+	public void addReviewOnProduct() throws InterruptedException  {
+		
+		ProductsPage productsPage = new ProductsPage(driver);
+		
+		//click on products button
+		productsPage.clickProductButton();
+		Thread.sleep(400); // wait for safe side
+		
+		//see if the all products page is displayed or not
+		Assert.assertEquals(productsPage.verifyAllProducts(), true, " ALL PRODUCTS page not displayed. ");
+		Thread.sleep(400); // wait for safe side
+		
+		//view Blue Top product
+		productsPage.viewFirstProduct();
+		
+		//verify that Write Your Review section is visible
+		Assert.assertEquals(productsPage.reviewSectionVis(), true, "  Review sction is not displayed . ");
+		
+		//enter details of Review name, email, and message
+		productsPage.enterReviewOnProduct("Reviewer", "reviewer@test.com", "Great product!");
+		
+		//verify that success message is visible
+		Assert.assertEquals(productsPage.successMessage(), true, "  message review not send . ");
+		
+		
+		
+	}
 	
 	
 	
