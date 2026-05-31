@@ -88,5 +88,7 @@ public class AuthenticationTests extends BaseTest {
 
         Assert.assertEquals(loginPage.getAccountDeletedMessage(), "ACCOUNT DELETED!");
         loginPage.clickContinue();
+     // Ahmed Test
+        
     }
 }
