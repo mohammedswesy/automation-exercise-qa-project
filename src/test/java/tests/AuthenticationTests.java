@@ -75,7 +75,7 @@ public class AuthenticationTests extends BaseTest {
 
         signupPage.fillAccountInformation("QualityAssurance", "1", "1", "1990");
 
-        signupPage.fillAddressDetails("Test", "User", "Automation Co.", "123 Test St", "California", "Los Angeles", "90001", "1234567890");
+        signupPage.fillAddressDetails("Test", "User", "Automation Co.", "123 Test St", "Gaza", "Palestine", "00970", "0599123456");
         
         signupPage.clickCreateAccount();
 
@@ -88,7 +88,7 @@ public class AuthenticationTests extends BaseTest {
 
         Assert.assertEquals(loginPage.getAccountDeletedMessage(), "ACCOUNT DELETED!");
         loginPage.clickContinue();
-     // Ahmed Test
+   
         
     }
 }
