@@ -99,6 +99,32 @@ public class ProductsPage {
     //Variabels
     boolean categoryHeaderVis, catagoryWomenDisplayed, catagoryMenDisplayed;
     
+    //////////////////////////////////////////////////////////////////////////
+												//locators for TC019
+    
+  //locator for Brands verify is visible on sidebar  
+    By brandSideBar = By.xpath("//h2[normalize-space()='Brands']");
+    
+    //locator for brand name Polo to click
+    By brandPolo = By.xpath("//a[@href='/brand_products/Polo']");
+    
+    //locator for verify user is navigated to brand page and Polo products are displayed
+    By brandPoloPageVis = By.xpath("//h2[normalize-space()='Brand - Polo Products']");
+    
+    //locator for brand name H&M to click
+    By brandHM = By.xpath("//a[@href='/brand_products/H&M']");
+    
+    //locator for verify user is navigated to brand page and H&M products are shown
+    By brandHMPageVis = By.xpath("//h2[normalize-space()='Brand - H&M Products']");
+
+    //variables
+    boolean bSideBar, bPoloPageVis, bHMPageVis;
+    
+    
+    
+    
+    
+    
     
     
     
@@ -340,6 +366,49 @@ public class ProductsPage {
 			clcickOnMenSubCata();
 			
 		}
+		
+		///////////////////////////////////////////////////////TC19: View & Cart Brand Products
+		
+		 //verify Brands is visible on sidebar 
+		public boolean brandSidebarVis() {
+			bSideBar= driver.findElement(brandSideBar).isDisplayed();
+			return bSideBar;
+			
+		}
+		
+		//click on brand polo
+		public void brandPoloClick() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollBy(0, 150);");
+			driver.findElement(brandPolo).click();
+			
+		}
+		
+		//verify that user navigated to polo brands and products are displayed
+		public boolean brandPoloVis() {
+			bPoloPageVis= driver.findElement(brandPoloPageVis).isDisplayed();
+			return bPoloPageVis;
+			
+		}		
+		
+		//click on brand H&M
+		public void brandHMClick() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollBy(0, 150);");
+			driver.findElement(brandHM).click();
+			
+		}
+		
+		//verify that user navigated to H&M brands and products are displayed
+		public boolean brandHMVis() {
+			bHMPageVis= driver.findElement(brandHMPageVis).isDisplayed();
+			return bHMPageVis;
+			
+		}	
+		
+		
 		
 		
 	

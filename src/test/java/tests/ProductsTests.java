@@ -112,6 +112,45 @@ public class ProductsTests extends BaseTest {
 		
 	}
 	
+													//TC19:View & Cart Brand Products
+	
+	@Test
+	public void viewAndCartBrandProduts() throws InterruptedException  {
+		
+		ProductsPage productsPage = new ProductsPage(driver);
+		
+		//click on products button
+		productsPage.clickProductButton();
+		Thread.sleep(100); // wait for safe side
+		
+		//verify Brands is visible on sidebar
+		Assert.assertEquals(productsPage.brandSidebarVis(), true, " Brands is not visible on sidebar. ");
+		
+		//click on brand polo
+		productsPage.brandPoloClick();
+		
+		//verify that user navigated to polo brands and products are displayed
+		Assert.assertEquals(productsPage.brandPoloVis(), true, " Polo brands products are not displayed . ");
+		Thread.sleep(1000); // wait for safe side
+		
+		//click on brand H&M
+		productsPage.brandHMClick();
+		
+		//verify that user navigated to polo brands and products are displayed
+		Assert.assertEquals(productsPage.brandHMVis(), true, " H&M brands products are not displayed . ");
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
