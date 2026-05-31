@@ -59,5 +59,34 @@ public class AuthenticationTests extends BaseTest {
                 signupPage.getExistingEmailError(),
                 "Email Address already exist!"
         );
+        
     }
-}	
+
+    @Test
+    public void registerNewUser() {
+        LoginPage loginPage = new LoginPage(driver);
+        SignupPage signupPage = new SignupPage(driver);
+
+        loginPage.openLoginPage();
+
+        String uniqueEmail = "testuser_" + System.currentTimeMillis() + "@gmail.com";
+
+        signupPage.signupWithExistingEmail("Test User", uniqueEmail); 
+
+        signupPage.fillAccountInformation("QualityAssurance", "1", "1", "1990");
+
+        signupPage.fillAddressDetails("Test", "User", "Automation Co.", "123 Test St", "California", "Los Angeles", "90001", "1234567890");
+        
+        signupPage.clickCreateAccount();
+
+        Assert.assertEquals(signupPage.getAccountCreatedMessage(), "ACCOUNT CREATED!");
+        signupPage.clickContinue();
+
+        Assert.assertTrue(loginPage.getLoggedInText().contains("Test User"));
+
+        loginPage.clickDeleteAccount();
+
+        Assert.assertEquals(loginPage.getAccountDeletedMessage(), "ACCOUNT DELETED!");
+        loginPage.clickContinue();
+    }
+}
