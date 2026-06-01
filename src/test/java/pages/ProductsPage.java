@@ -1,5 +1,471 @@
 package pages;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+
 public class ProductsPage {
 
+	WebDriver driver;
+	 											//All locators needed
+	
+												//locators for TC007
+	// home page locator
+    By homePage = By.cssSelector("div[class='features_items'] h2[class='title text-center']");
+    
+    // test cases button locator
+    By testCase = By.linkText("Test Cases");
+    
+    // to verify test case page is visable 
+    By titleTestCases = By.xpath("//b[normalize-space()='Test Cases']");
+    
+    //variables 
+    boolean hPageExist, testCaseVis ;
+    
+    /////////////////////////////////////////////////////////////////////////
+
+    											//locators for TC008
+    //locator for product button
+    By productBtn = By.xpath("//a[@href='/products']");
+    
+    // to verify all products page is visable 
+    By productsVisable = By.xpath("//div[@class='features_items']/h2");
+    
+    // to verify products list is visable 
+    By productsList = By.xpath("//div[@class='features_items']//div[@class='col-sm-4']");
+    
+    // locator for first product
+    By firstProduct = By.xpath("(//div[@class='features_items']//div[@class='choose']//a)[1]");
+    
+    //locator for product details of first product is opened (image)
+    By fProductDetailsPage = By.cssSelector("div[class='view-product'] img[alt='ecommerce website products']");
+    
+    //locator for product details are visable
+    By productName = By.xpath("//div[@class='product-information']/h2");
+    By productCategory = By.xpath("//div[@class='product-details']//p[1]");
+    By productPrice = By.xpath("//div[@class='product-information']//span//span");
+    By productAvailability = By.xpath("//b[text()='Availability:']");
+    By productCondition = By.xpath("//b[text()='Condition:']");
+    By productBrand = By.xpath("//b[text()='Brand:']");
+    
+    //variables
+    boolean allProductsVis, fProductDetailsOpen, name, categoryFProduct, price, availability, condition, brand;
+	int productsListEmp;
+    
+    /////////////////////////////////////////////////////////////////////////
+										//locators for TC009
+    //locator for search bar
+    By searchBar = By.xpath("//input[@id='search_product']");
+    
+    //locator for search bar
+    By searchBtn = By.xpath("//button[@id='submit_search']");
+    
+    //locator for Searched Products header
+    By searchedProductsHeader = By.xpath("//h2[normalize-space()='Searched Products']");
+    
+    //locator for all items related to word searched in search bar
+    By searchedItems = By.xpath("//div[@class='single-products']//p");
+    
+    //variables
+    boolean searchedProHeadVis, allSearchedProVis;
+ //////////////////////////////////////////////////////////////////////////
+  												//locators for TC018
+    
+    //locator for Catagory header if visible
+    By catagoryHeadVis = By.xpath("//h2[normalize-space()='Category']");
+    
+    //locator for women catagory to click
+    By womenCatagory = By.xpath("//a[normalize-space()='Women']");
+    
+    //locator for Dress subcatagory of women catagory to click
+    By subCatagoryWomen = By.xpath("//div[@id='Women']//a[contains(text(),'Dress')]");
+    
+    //locator to verify category page is displayed with correct heading "Women - Dress"
+    By catagoryHeaderWomenDisplayed = By.xpath("//h2[normalize-space()='Women - Dress Products']");
+    
+    //locator for men catagory to click
+    By menCatagory = By.xpath("//a[normalize-space()='Men']");
+
+    //locator for tshirts subcatagory of men catagory to click
+    By subCatagoryMen = By.xpath("//a[normalize-space()='Tshirts']");
+    
+    //locator to verify category page is displayed with correct heading "Men - Tshirts "
+    By catagoryHeaderMenDisplayed = By.xpath("//h2[normalize-space()='Men - Tshirts Products']");
+    
+    //Variabels
+    boolean categoryHeaderVis, catagoryWomenDisplayed, catagoryMenDisplayed;
+    
+    //////////////////////////////////////////////////////////////////////////
+												//locators for TC019
+    
+  //locator for Brands verify is visible on sidebar  
+    By brandSideBar = By.xpath("//h2[normalize-space()='Brands']");
+    
+    //locator for brand name Polo to click
+    By brandPolo = By.xpath("//a[@href='/brand_products/Polo']");
+    
+    //locator for verify user is navigated to brand page and Polo products are displayed
+    By brandPoloPageVis = By.xpath("//h2[normalize-space()='Brand - Polo Products']");
+    
+    //locator for brand name H&M to click
+    By brandHM = By.xpath("//a[@href='/brand_products/H&M']");
+    
+    //locator for verify user is navigated to brand page and H&M products are shown
+    By brandHMPageVis = By.xpath("//h2[normalize-space()='Brand - H&M Products']");
+
+    //variables
+    boolean bSideBar, bPoloPageVis, bHMPageVis;
+    
+    
+    //////////////////////////////////////////////////////////////////////////
+												//locators for TC021
+  
+    //locator for verify reviwe section is visible
+    By reviweSectionVis  = By.xpath("//a[normalize-space()='Write Your Review']");
+    
+    //locator for reviwer name 
+    By reviwerName  = By.xpath("//input[@id='name']");
+    
+    //locator for email
+    By reviwerEmail = By.xpath("//input[@id='email']");
+    
+    //locator for reviewer message 
+    By reviweMessage = By.xpath("//textarea[@id='review']");
+    
+    //locator for submit button
+    By submitBtn = By.xpath("//button[@id='button-review']");
+    
+  //locator for verify success message sent 
+    By successMessage = By.xpath("//span[normalize-space()='Thank you for your review.']");
+    
+    //variables
+    boolean reviewSectionVis, successMessageVis;
+    
+    //*********************************************************************************************************************\\
+    
+    //genral constructor
+    public ProductsPage(WebDriver driver) {
+        this.driver = driver;
+        
+    }
+    
+	///////////////////////////////////////////////TC007 Verify Test Cases Page	
+    
+    // verify home page is visible
+	public boolean verifyHomePageExist() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+		hPageExist = driver.findElement(homePage).isDisplayed();
+    	return hPageExist;
+    	
+	}
+    
+	// click test cases button and prevent ad pop up
+	public void clickTestCase() {
+		 WebElement testCaseSection = driver.findElement(testCase);
+		 testCaseSection.click();
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
+		 js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+		 js.executeScript("window.scrollTo(0, 0);");
+		 testCaseSection.click();
+		 
+	}
+
+    // return if user is navigated to test cases page and displayed
+	public boolean verifyTestCases() {
+		testCaseVis= driver.findElement(titleTestCases).isDisplayed();
+		return testCaseVis;
+		
+	}
+	
+	///////////////////////////////////////////////TC008 Verify All Products Page and product details	
+	
+	// click on product page
+	public void clickProductButton() {
+		driver.findElement(productBtn).click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+		driver.findElement(productBtn).click();
+		
+	}
+	
+	 // return if user is navigated to all produts page and displayed
+		public boolean verifyAllProducts() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			allProductsVis= driver.findElement(productsVisable).isDisplayed();
+			return allProductsVis;
+			
+		}
+	
+		// return that the product list is empty
+		public int verifyProductsList() {
+			List<WebElement> productsLists = driver.findElements(productsList);
+			productsListEmp= productsLists.size();
+			return productsListEmp;
+			
+		}
+		
+		//view first product details annd scroll for amount of pixels to pervent Ads
+		public void viewFirstProduct() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollBy(0, 300);");
+			driver.findElement(firstProduct).click();
+			
+		}
+	
+		//view first product is opened
+		public boolean fProductDetailsPage() {
+			fProductDetailsOpen= driver.findElement(fProductDetailsPage).isDisplayed();
+			return fProductDetailsOpen;
+			
+		}
+	
+		//verify first product details are visible
+		public boolean fProductName() {
+			name= driver.findElement(productName).isDisplayed();
+			return name;
+					
+		}
+		
+		public boolean fProductCata() {
+			categoryFProduct= driver.findElement(productCategory).isDisplayed();
+			return categoryFProduct;
+					
+		}
+		
+		public boolean fProductPrice() {
+			price= driver.findElement(productPrice).isDisplayed();
+			return price;
+					
+		}
+		
+		public boolean fProductAval() {
+			availability= driver.findElement(productAvailability).isDisplayed();
+			return availability;
+					
+		}
+		
+		public boolean fProductCondition() {
+			condition= driver.findElement(productCondition).isDisplayed();
+			return condition;
+					
+		}
+		
+		public boolean fProductBrand() {
+			brand= driver.findElement(productBrand).isDisplayed();
+			return brand;
+					
+		}
+	
+	///////////////////////////////////////////////////////TC9: Search Product
+	
+		//enter product name in search bar "Top" and click
+		public void enterInputInSearch(String item) {
+			driver.findElement(searchBar).sendKeys(item);
+			driver.findElement(searchBtn).click();
+		}
+		
+		//verify Searched Products header is visible
+		public boolean searchProductsHeadVis() {
+			searchedProHeadVis= driver.findElement(searchedProductsHeader).isDisplayed();
+			return searchedProHeadVis;
+							
+		}
+		
+		// return that the product list is empty
+		public boolean sreachedItemRelated() {
+			List<WebElement> productsRelated = driver.findElements(searchedItems);
+			allSearchedProVis= productsRelated.isEmpty();
+			return allSearchedProVis;
+					
+		}
+
+		
+		///////////////////////////////////////////////////////TC18: View Catagory
+		
+		//verify that catagory header is visable 
+		public boolean catagoryVisible() {
+			categoryHeaderVis= driver.findElement(catagoryHeadVis).isDisplayed();
+			return categoryHeaderVis;
+			
+		}
+		
+		//click on women catagory
+		public void clcickOnWomenCata() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollBy(0, 150);");
+			driver.findElement(womenCatagory).click();
+			
+		}
+		
+		//click on women catagory sub-catagory "Dress"
+		public void clcickOnWomSubCata() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollBy(0, 150);");
+			driver.findElement(subCatagoryWomen).click();
+			
+		}
+		
+		//verify that catagory Dress header is visable 
+		public boolean catagoryHearderDress() {
+			catagoryWomenDisplayed= driver.findElement(catagoryHeaderWomenDisplayed).isDisplayed();
+			return catagoryWomenDisplayed;
+			
+		}
+		
+		//click on men catagory
+		public void clcickOnMenCata() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollBy(0, 150);");
+			driver.findElement(menCatagory).click();
+			
+		}
+		
+		//click on men catagory sub-catagory "Tshirt"
+		public void clcickOnMenSubCata() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollBy(0, 150);");
+			driver.findElement(subCatagoryMen).click();
+			
+		}
+		
+		//verify that catagory Tshirt header is visable 
+		public boolean catagoryHearderTshirts() {
+			catagoryMenDisplayed= driver.findElement(catagoryHeaderMenDisplayed).isDisplayed();
+			return catagoryMenDisplayed;
+			
+		}
+		
+		//to call women method
+		public void womenCatagory() {
+			clcickOnWomenCata();
+			clcickOnWomSubCata();
+			
+		}
+		
+		//to call men method
+		public void menCatagory() {
+			clcickOnMenCata();
+			clcickOnMenSubCata();
+			
+		}
+		
+		///////////////////////////////////////////////////////TC19: View & Cart Brand Products
+		
+		 //verify Brands is visible on sidebar 
+		public boolean brandSidebarVis() {
+			bSideBar= driver.findElement(brandSideBar).isDisplayed();
+			return bSideBar;
+			
+		}
+		
+		//click on brand polo
+		public void brandPoloClick() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollBy(0, 150);");
+			driver.findElement(brandPolo).click();
+			
+		}
+		
+		//verify that user navigated to polo brands and products are displayed
+		public boolean brandPoloVis() {
+			bPoloPageVis= driver.findElement(brandPoloPageVis).isDisplayed();
+			return bPoloPageVis;
+			
+		}		
+		
+		//click on brand H&M
+		public void brandHMClick() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollBy(0, 150);");
+			driver.findElement(brandHM).click();
+			
+		}
+		
+		//verify that user navigated to H&M brands and products are displayed
+		public boolean brandHMVis() {
+			bHMPageVis= driver.findElement(brandHMPageVis).isDisplayed();
+			return bHMPageVis;
+			
+		}	
+		
+		///////////////////////////////////////////////////////TC19: View & Cart Brand Products
+		
+		public boolean reviewSectionVis() {
+			reviewSectionVis= driver.findElement(reviweSectionVis).isDisplayed();
+			return reviewSectionVis;
+			
+		}	
+		
+		
+		public void enterName(String name) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+			driver.findElement(reviwerName).sendKeys(name);
+			
+		}
+		
+		
+		public void enterEmail(String email) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+			driver.findElement(reviwerEmail).sendKeys(email);
+			
+		}
+		
+		
+		public void enterReviewMess(String reviwerMessage) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+			driver.findElement(reviweMessage).sendKeys(reviwerMessage);
+			
+		}
+		
+		
+		public void clickSubmit() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove();");
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+			driver.findElement(submitBtn).click();
+			
+		}
+		
+		
+		public void enterReviewOnProduct (String name, String email,String reviwerMessage ) {
+			enterName(name);
+			enterEmail(email);
+			enterReviewMess(reviwerMessage);
+			clickSubmit();
+			
+		}
+		
+		
+		public boolean successMessage () {
+			successMessageVis= driver.findElement(successMessage).isDisplayed();
+			return successMessageVis;
+			
+		}	
+		
+		
+		
+		
+		
+		
+	
 }
+	
