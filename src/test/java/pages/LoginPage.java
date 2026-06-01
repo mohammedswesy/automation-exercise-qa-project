@@ -17,6 +17,10 @@ public class LoginPage {
     By loginErrorMessage = By.xpath("//p[text()='Your email or password is incorrect!']");
     By logoutLink = By.linkText("Logout");
 
+    By deleteAccountLink = By.linkText("Delete Account");
+    By accountDeletedHeading = By.xpath("//h2[@data-qa='account-deleted']/b");
+    By continueButton = By.xpath("//a[@data-qa='continue-button']");
+
     public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -43,5 +47,17 @@ public class LoginPage {
 
     public void logout() {
         driver.findElement(logoutLink).click();
+    }
+
+    public void clickDeleteAccount() {
+        driver.findElement(deleteAccountLink).click();
+    }
+
+    public String getAccountDeletedMessage() {
+        return driver.findElement(accountDeletedHeading).getText();
+    }
+
+    public void clickContinue() {
+        driver.findElement(continueButton).click();
     }
 }

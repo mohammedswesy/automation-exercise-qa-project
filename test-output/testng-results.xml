@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-05-31T09:04:22 GMT+02:00" name="Default suite" finished-at="2026-05-31T09:06:44 GMT+02:00" duration-ms="142719">
+    <groups>
+    </groups>
+    <test started-at="2026-05-31T09:04:22 GMT+02:00" name="Default test" finished-at="2026-05-31T09:06:44 GMT+02:00" duration-ms="142719">
+      <class name="tests.AuthenticationTests">
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:04:22 GMT+02:00" name="setup" finished-at="2026-05-31T09:04:45 GMT+02:00" duration-ms="23228" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="loginWithInvalidCredentials()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:04:45 GMT+02:00" name="loginWithInvalidCredentials" finished-at="2026-05-31T09:04:54 GMT+02:00" duration-ms="9384" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginWithInvalidCredentials -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:04:54 GMT+02:00" name="tearDown" finished-at="2026-05-31T09:04:55 GMT+02:00" duration-ms="381" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:04:55 GMT+02:00" name="setup" finished-at="2026-05-31T09:05:06 GMT+02:00" duration-ms="11002" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="loginWithValidCredentials()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:05:06 GMT+02:00" name="loginWithValidCredentials" finished-at="2026-05-31T09:05:41 GMT+02:00" duration-ms="35482" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginWithValidCredentials -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:05:41 GMT+02:00" name="tearDown" finished-at="2026-05-31T09:05:42 GMT+02:00" duration-ms="459" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:05:42 GMT+02:00" name="setup" finished-at="2026-05-31T09:05:49 GMT+02:00" duration-ms="6940" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="logoutUser()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:05:49 GMT+02:00" name="logoutUser" finished-at="2026-05-31T09:05:59 GMT+02:00" duration-ms="10780" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- logoutUser -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:05:59 GMT+02:00" name="tearDown" finished-at="2026-05-31T09:06:00 GMT+02:00" duration-ms="489" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:06:00 GMT+02:00" name="setup" finished-at="2026-05-31T09:06:08 GMT+02:00" duration-ms="8283" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="registerNewUser()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:06:08 GMT+02:00" name="registerNewUser" finished-at="2026-05-31T09:06:29 GMT+02:00" duration-ms="20935" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- registerNewUser -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:06:29 GMT+02:00" name="tearDown" finished-at="2026-05-31T09:06:30 GMT+02:00" duration-ms="496" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:06:30 GMT+02:00" name="setup" finished-at="2026-05-31T09:06:39 GMT+02:00" duration-ms="9472" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="registerWithExistingEmail()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:06:39 GMT+02:00" name="registerWithExistingEmail" finished-at="2026-05-31T09:06:44 GMT+02:00" duration-ms="4949" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- registerWithExistingEmail -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.AuthenticationTests@65fb9ffc]" started-at="2026-05-31T09:06:44 GMT+02:00" name="tearDown" finished-at="2026-05-31T09:06:44 GMT+02:00" duration-ms="339" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.AuthenticationTests -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
