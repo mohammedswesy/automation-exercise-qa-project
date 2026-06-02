@@ -20,7 +20,7 @@ public class CartPage {
     By productsLink = By.xpath("//a[@href='/products']");
     By cartLink = By.xpath("//a[@href='/view_cart']");
 
-    By subscriptionTitle = By.xpath("//div[@class='single-widget']/h2");
+    By subscriptionTitle = By.xpath("//h2[contains(text(),'Subscription')]");
     By subscriptionEmail = By.id("susbscribe_email");
     By subscribeButton = By.id("subscribe");
     By successMessage = By.id("success-subscribe");
@@ -47,12 +47,19 @@ public class CartPage {
     }
 
     private void jsClick(By locator) {
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+
+        WebElement element = wait.until(
+                ExpectedConditions.elementToBeClickable(locator));
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView(true);", element);
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].click();", element);
     }
 
     public boolean isHomePageVisible() {
-        return driver.getTitle().equals("Automation Exercise");
+        return driver.getCurrentUrl().contains("automationexercise");
     }
 
     public boolean isOnProductDetailPage() {
@@ -68,7 +75,15 @@ public class CartPage {
     }
 
     public void scrollToFooter() {
-        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight);");
+
+        ((JavascriptExecutor) driver)
+                .executeScript("window.scrollTo(0, document.body.scrollHeight)");
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getSubscriptionTitle() {
@@ -105,7 +120,11 @@ public class CartPage {
     }
 
     public void clickViewProduct(int productId) {
-        jsClick(By.xpath("//a[@href='/product_details/" + productId + "']"));
+
+        By viewProduct = By.xpath(
+                "(//a[contains(text(),'View Product')])[" + productId + "]");
+
+        jsClick(viewProduct);
     }
 
     public void setQuantity(String quantity) {

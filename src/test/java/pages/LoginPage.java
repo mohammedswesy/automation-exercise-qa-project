@@ -4,10 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginPage {
 
     WebDriver driver;
+    WebDriverWait wait;
 
     By signupLoginLink = By.linkText("Signup / Login");
     By loginEmail = By.xpath("//input[@data-qa='login-email']");
@@ -23,41 +28,50 @@ public class LoginPage {
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
+    private void jsClick(By locator) {
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView(true);", element);
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].click();", element);
     }
 
     public void openLoginPage() {
-        driver.findElement(signupLoginLink).click();
+        jsClick(signupLoginLink);
     }
 
     public void login(String email, String password) {
-        driver.findElement(loginEmail).sendKeys(email);
-        driver.findElement(loginPassword).sendKeys(password);
-        WebElement loginBtn = driver.findElement(loginButton);
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", loginBtn);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(loginEmail)).sendKeys(email);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(loginPassword)).sendKeys(password);
+        jsClick(loginButton);
     }
 
     public String getLoggedInText() {
-        return driver.findElement(loggedInText).getText();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(loggedInText)).getText();
     }
 
     public String getLoginErrorMessage() {
-        return driver.findElement(loginErrorMessage).getText();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(loginErrorMessage)).getText();
     }
 
     public void logout() {
-        driver.findElement(logoutLink).click();
+        jsClick(logoutLink);
     }
 
     public void clickDeleteAccount() {
-        driver.findElement(deleteAccountLink).click();
+        jsClick(deleteAccountLink);
     }
 
     public String getAccountDeletedMessage() {
-        return driver.findElement(accountDeletedHeading).getText();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(accountDeletedHeading)).getText();
     }
 
     public void clickContinue() {
-        driver.findElement(continueButton).click();
+        jsClick(continueButton);
     }
 }

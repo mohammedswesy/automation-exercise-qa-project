@@ -74,7 +74,7 @@ public class CartTests extends BaseTest {
         cartPage.addProductToCartById(1);
         cartPage.clickViewCart();
         Assert.assertTrue(cartPage.getCartProductNames().contains("Blue Top"));
-        loginPage.openLoginPage();
+        driver.get("https://automationexercise.com/login");
         loginPage.login("solefi8727@okcpress.com", "QualityAssurance");
         Assert.assertTrue(loginPage.getLoggedInText().contains("QA"));
         cartPage.goToCart();

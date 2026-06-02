@@ -28,16 +28,20 @@ public class CheckoutTests extends BaseTest {
 
     // TC 16 — Place Order: Login before Checkout
     @Test
-  
     public void placeOrderLoginBeforeCheckout() {
 
-        LoginPage loginPage       = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
         CheckoutPage checkoutPage = new CheckoutPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        driver.get("https://automationexercise.com/login");
 
         loginPage.login(TestData.LOGIN_EMAIL, TestData.LOGIN_PASSWORD);
 
+        homePage.scrollToBottom();
+
         checkoutPage.addRecommendedProductToCart();
-        checkoutPage.clickViewCart();        
+        checkoutPage.clickViewCart();
         checkoutPage.clickProceedToCheckout();
 
         Assert.assertTrue(checkoutPage.isDeliveryAddressVisible());
@@ -60,11 +64,15 @@ public class CheckoutTests extends BaseTest {
     @Test
     public void verifyAddressDetailsInCheckoutPage() {
 
-        LoginPage loginPage       = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
         CheckoutPage checkoutPage = new CheckoutPage(driver);
+        HomePage homePage = new HomePage(driver);
 
+        driver.get("https://automationexercise.com/login");
 
         loginPage.login(TestData.LOGIN_EMAIL, TestData.LOGIN_PASSWORD);
+
+        homePage.scrollToBottom();
 
         checkoutPage.addRecommendedProductToCart();
         checkoutPage.clickViewCart();
@@ -78,16 +86,21 @@ public class CheckoutTests extends BaseTest {
     @Test
     public void downloadInvoiceAfterPurchaseOrder() {
 
-        LoginPage loginPage       = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
         CheckoutPage checkoutPage = new CheckoutPage(driver);
+        HomePage homePage = new HomePage(driver);
 
+        driver.get("https://automationexercise.com/login");
 
         loginPage.login(TestData.LOGIN_EMAIL, TestData.LOGIN_PASSWORD);
+
+        homePage.scrollToBottom();
 
         checkoutPage.addRecommendedProductToCart();
         checkoutPage.clickViewCart();
         checkoutPage.clickProceedToCheckout();
         checkoutPage.clickPlaceOrder();
+
         checkoutPage.enterPaymentDetails(
                 TestData.CARD_NAME,
                 TestData.CARD_NUMBER,
@@ -95,6 +108,7 @@ public class CheckoutTests extends BaseTest {
                 TestData.CARD_EXPIRY_MONTH,
                 TestData.CARD_EXPIRY_YEAR
         );
+
         checkoutPage.clickPayAndConfirm();
 
         Assert.assertTrue(checkoutPage.isOrderPlacedVisible());

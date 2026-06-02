@@ -43,7 +43,8 @@ public class ProductsTests extends BaseTest {
 		Assert.assertEquals(productsPage.verifyAllProducts(), true, "  All products not displayed. ");
 		
 		//verify that products list are visible
-		Assert.assertNotEquals(productsPage.verifyProductsList(), true, " Products list not displayed. ");
+		Assert.assertTrue(productsPage.verifyProductsList() > 0,
+		        " Products list not displayed. ");
 		Thread.sleep(100); // wait for safe side
 		
 		//view first product
@@ -85,7 +86,8 @@ public class ProductsTests extends BaseTest {
 		Assert.assertEquals(productsPage.searchProductsHeadVis(), true, " Searched Products heading not displayed. ");
 		
 		//see if the Searched Products whom related to search displayed
-		Assert.assertEquals(productsPage.sreachedItemRelated(), false, " Searched Products from search bar not displayed. ");
+		Assert.assertEquals(productsPage.sreachedItemRelated(), true,
+		        " Searched Products from search bar not displayed. ");
 		
 	}
 	

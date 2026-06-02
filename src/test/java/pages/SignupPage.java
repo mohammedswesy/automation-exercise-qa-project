@@ -2,11 +2,18 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class SignupPage {
 
     WebDriver driver;
+    WebDriverWait wait;
 
     By signupName = By.xpath("//input[@data-qa='signup-name']");
     By signupEmail = By.xpath("//input[@data-qa='signup-email']");
@@ -33,18 +40,29 @@ public class SignupPage {
 
     public SignupPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
+    private void jsClick(By locator) {
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView(true);", element);
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].click();", element);
     }
 
     public void enterSignupName(String name) {
-        driver.findElement(signupName).sendKeys(name);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(signupName)).sendKeys(name);
     }
 
     public void enterSignupEmail(String email) {
-        driver.findElement(signupEmail).sendKeys(email);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(signupEmail)).sendKeys(email);
     }
 
     public void clickSignupButton() {
-        driver.findElement(signupButton).click();
+        jsClick(signupButton);
     }
 
     public void signupWithExistingEmail(String name, String email) {
@@ -54,36 +72,40 @@ public class SignupPage {
     }
 
     public String getExistingEmailError() {
-        return driver.findElement(existingEmailError).getText();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(existingEmailError)).getText();
     }
 
     public void fillAccountInformation(String password, String day, String month, String year) {
-        driver.findElement(passwordField).sendKeys(password);
-        new Select(driver.findElement(daysDropdown)).selectByValue(day);
-        new Select(driver.findElement(monthsDropdown)).selectByValue(month);
-        new Select(driver.findElement(yearsDropdown)).selectByValue(year);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(passwordField)).sendKeys(password);
+
+        new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(daysDropdown))).selectByValue(day);
+        new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(monthsDropdown))).selectByValue(month);
+        new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(yearsDropdown))).selectByValue(year);
     }
 
-    public void fillAddressDetails(String firstName, String lastName, String company, String address, String state, String city, String zipcode, String mobile) {
-        driver.findElement(firstNameField).sendKeys(firstName);
-        driver.findElement(lastNameField).sendKeys(lastName);
-        driver.findElement(companyField).sendKeys(company);
-        driver.findElement(addressField).sendKeys(address);
-        driver.findElement(stateField).sendKeys(state);
-        driver.findElement(cityField).sendKeys(city);
-        driver.findElement(zipcodeField).sendKeys(zipcode);
-        driver.findElement(mobileNumberField).sendKeys(mobile);
+    public void fillAddressDetails(String firstName, String lastName, String company,
+                                   String address, String state, String city,
+                                   String zipcode, String mobile) {
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameField)).sendKeys(firstName);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lastNameField)).sendKeys(lastName);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(companyField)).sendKeys(company);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addressField)).sendKeys(address);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(stateField)).sendKeys(state);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cityField)).sendKeys(city);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(zipcodeField)).sendKeys(zipcode);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(mobileNumberField)).sendKeys(mobile);
     }
 
     public void clickCreateAccount() {
-        driver.findElement(createAccountButton).click();
+        jsClick(createAccountButton);
     }
 
     public String getAccountCreatedMessage() {
-        return driver.findElement(accountCreatedHeading).getText();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(accountCreatedHeading)).getText();
     }
 
     public void clickContinue() {
-        driver.findElement(continueButton).click();
+        jsClick(continueButton);
     }
 }
