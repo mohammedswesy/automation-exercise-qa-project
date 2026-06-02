@@ -145,4 +145,37 @@ public class CheckoutTests extends BaseTest {
 
         Assert.assertTrue(homePage.isHomePageTextVisible());
     }
+    
+ // TC 14 — Place Order: Register while Checkout
+    @Test
+    public void placeOrderRegisterWhileCheckout() {
+
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        homePage.scrollToBottom();
+
+        checkoutPage.addRecommendedProductToCart();
+
+        checkoutPage.clickViewCart();
+
+        Assert.assertTrue(checkoutPage.isProductDisplayedInCart());
+    }
+    
+ // TC 15 — Place Order: Register before Checkout
+
+    @Test
+    public void placeOrderRegisterBeforeCheckout() {
+
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        homePage.scrollToBottom();
+
+        checkoutPage.addRecommendedProductToCart();
+
+        checkoutPage.clickViewCart();
+
+        Assert.assertTrue(checkoutPage.isProductDisplayedInCart());
+    }
 }

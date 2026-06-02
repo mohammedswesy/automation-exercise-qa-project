@@ -91,4 +91,14 @@ public class AuthenticationTests extends BaseTest {
    
         
     }
+    
+    @Test
+    public void verifySignupLoginPageIsVisible() {
+
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.openLoginPage();
+
+        Assert.assertTrue(driver.getCurrentUrl().contains("login"));
+    }
 }
